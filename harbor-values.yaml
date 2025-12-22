@@ -1,14 +1,14 @@
 expose:
   type: ingress
+  tls:
+    enabled: true
+    certSource: secret
+    secret:
+      secretName: k8s-tls
   ingress:
     hosts:
       core: harbor.k8s.labs.itmo.loc
     className: nginx
-    annotations:
-      kubernetes.io/ingress.class: nginx
-    tls:
-      enabled: true
-      secretName: k8s-tls
 externalURL: https://harbor.k8s.labs.itmo.loc
 harborAdminPassword: "admin"
 persistence:
