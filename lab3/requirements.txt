@@ -1,0 +1,5 @@
+mlflow
+evidently
+scikit-learn
+pandas
+numpy
