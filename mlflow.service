@@ -1,0 +1,25 @@
+[Unit]
+Description=MLflow Tracking Server
+After=network.target
+
+[Service]
+User=mlflow
+Group=mlflow
+WorkingDirectory=/opt/mlflow
+Environment="PATH=/opt/mlflow/venv/bin"
+
+ExecStart=/opt/mlflow/venv/bin/mlflow server \
+  --backend-store-uri sqlite:////opt/mlflow/mlflow.db \
+  --default-artifact-root mlflow-artifacts:/ \
+  --artifacts-destination /opt/mlflow/artifacts \
+  --serve-artifacts \
+  --host 127.0.0.1 \
+  --port 5000 \
+  --allowed-hosts mlflow.labs.itmo.loc,localhost,127.0.0.1 \
+  --cors-allowed-origins https://mlflow.labs.itmo.loc
+
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
